@@ -3,6 +3,7 @@ import {
   PropsWithChildren,
   useContext,
   useLayoutEffect,
+  // useEffect
   VFC,
 } from 'react';
 
@@ -29,6 +30,7 @@ export const TabItem: VFC<PropsWithChildren<TabItemProps>> = ({
   const { activeKey, addItem } = useContext(TabContext);
 
   useLayoutEffect(() => {
+    // useEffect(() => {
     addItem(title, tabKey);
   }, [addItem, tabKey, title]);
 

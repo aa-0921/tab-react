@@ -48,6 +48,7 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
   }, []);
 
   const state = useMemo<TabState>(
+    // ↓この形なに
     () => ({
       activeKey,
       addItem: addTab,
