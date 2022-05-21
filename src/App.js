@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+// import { Tab, TabItem } from './components/Tab';
+
+import { Tab } from './components/Tab.tsx';
+import { TabItem } from './components/TabItem.tsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>hoge</div>
+      <div className="App">
+        <Tab defaultKey="first">
+          <TabItem tabKey="first" title="first">
+            first content
+          </TabItem>
+          <TabItem tabKey="second" title="second">
+            second content
+          </TabItem>
+        </Tab>
+      </div>
+    </>
   );
 }
 
