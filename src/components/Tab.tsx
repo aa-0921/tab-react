@@ -1,13 +1,15 @@
 import {
   createContext,
+  // memo,
   PropsWithChildren,
   useCallback,
+  useContext,
+  useLayoutEffect,
   useMemo,
   useState,
   VFC,
 } from 'react';
 
-// import '../tab.css';
 import '../styles/tab.css';
 
 type TabState = {
@@ -35,10 +37,7 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
 }) => {
   const [activeKey, setActiveKey] = useState(defaultKey);
   const [tabs, setTabs] = useState<TabValue[]>([]);
-  // TabItemコンポーネントで使われているaddTab関数
   const addTab = useCallback((title: string, key: string) => {
-    // setState
-    //
     setTabs((tabs) => {
       if (tabs.findIndex((item) => item.key === key) > 0) {
         return tabs;
@@ -48,7 +47,6 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
     });
   }, []);
 
-  // contextで渡している値
   const state = useMemo<TabState>(
     () => ({
       activeKey,
@@ -73,4 +71,23 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
       {children}
     </TabContext.Provider>
   );
+};
+
+type TabItemProps = {
+  tabKey: string;
+  title: string;
+};
+
+export const TabItem: VFC<PropsWithChildren<TabItemProps>> = ({
+  title,
+  tabKey,
+  children,
+}) => {
+  const { activeKey, addItem } = useContext(TabContext);
+
+  useLayoutEffect(() => {
+    addItem(title, tabKey);
+  }, [addItem, tabKey, title]);
+
+  return tabKey === activeKey ? <>{children}</> : null;
 };
