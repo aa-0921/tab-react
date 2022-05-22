@@ -38,6 +38,7 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
   const [tabs, setTabs] = useState<TabValue[]>([]);
   const addTab = useCallback((title: string, key: string) => {
     setTabs((tabs) => {
+      // 追加しようとしたタブがtabsに存在していたら追加せずそのままtabsを返す
       if (tabs.findIndex((item) => item.key === key) >= 0) {
         return tabs;
       } else {
@@ -84,9 +85,11 @@ export const TabItem: VFC<PropsWithChildren<TabItemProps>> = ({
 }) => {
   const { activeKey, addItem } = useContext(TabContext);
 
+  // useEffectとほぼ同じで、同期的に処理を行う部分だけ異なる
   useLayoutEffect(() => {
     addItem(title, tabKey);
   }, [addItem, title, tabKey]);
 
+  // そのタブがactiveならそのTabItemの子要素を表示する
   return tabKey === activeKey ? <>{children}</> : null;
 };
