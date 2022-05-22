@@ -1,6 +1,6 @@
 import {
   createContext,
-  // memo,
+  memo,
   PropsWithChildren,
   useCallback,
   useContext,
@@ -39,7 +39,7 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
   const [tabs, setTabs] = useState<TabValue[]>([]);
   const addTab = useCallback((title: string, key: string) => {
     setTabs((tabs) => {
-      if (tabs.findIndex((item) => item.key === key) > 0) {
+      if (tabs.findIndex((item) => item.key === key) >= 0) {
         return tabs;
       } else {
         return [...tabs, { title, key }];
@@ -48,12 +48,11 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
   }, []);
 
   const state = useMemo<TabState>(
-    // ↓この形なに
     () => ({
       activeKey,
       addItem: addTab,
     }),
-    [activeKey, addTab]
+    [activeKey, tabs]
   );
 
   return (
@@ -88,7 +87,7 @@ export const TabItem: VFC<PropsWithChildren<TabItemProps>> = ({
 
   useLayoutEffect(() => {
     addItem(title, tabKey);
-  }, [addItem, tabKey, title]);
+  }, []);
 
   return tabKey === activeKey ? <>{children}</> : null;
 };

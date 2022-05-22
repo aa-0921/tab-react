@@ -6,8 +6,19 @@ import { Tab, TabItem } from './components/Tab.tsx';
 
 function App() {
   return (
+    // <div className="App">
+    //   <Tab defaultKey="first">
+    //     <TabItem tabKey="first" title="first">
+    //       first content
+    //     </TabItem>
+    //     <TabItem tabKey="second" title="second">
+    //       second content
+    //     </TabItem>
+    //   </Tab>
+    // </div>
     <div className="App">
       <Tab defaultKey="first">
+        <h3>common content</h3>
         <TabItem tabKey="first" title="first">
           first content
         </TabItem>
