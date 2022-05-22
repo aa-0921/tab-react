@@ -1,6 +1,5 @@
 import {
   createContext,
-  memo,
   PropsWithChildren,
   useCallback,
   useContext,
@@ -52,7 +51,7 @@ export const Tab: VFC<PropsWithChildren<TabProps>> = ({
       activeKey,
       addItem: addTab,
     }),
-    [activeKey, tabs]
+    [activeKey, addTab]
   );
 
   return (
@@ -87,7 +86,7 @@ export const TabItem: VFC<PropsWithChildren<TabItemProps>> = ({
 
   useLayoutEffect(() => {
     addItem(title, tabKey);
-  }, []);
+  }, [addItem, title, tabKey]);
 
   return tabKey === activeKey ? <>{children}</> : null;
 };
